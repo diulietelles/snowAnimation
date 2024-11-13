@@ -1,0 +1,88 @@
+<html><head><base href="." />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snow animation</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    
+      body {
+        background: linear-gradient(#c41e3a, #8b0000);
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+        font-family: 'Arial', sans-serif;
+      }
+    
+      .snowfall {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+    
+      .snowflake {
+        position: absolute;
+        background: #fff;
+        border-radius: 50%;
+        opacity: 0.8;
+        animation: snowfall linear infinite;
+      }
+    
+      @keyframes snowfall {
+        0% {
+          transform: translateY(-10vh) translateX(0);
+        }
+        100% {
+          transform: translateY(100vh) translateX(20px);
+        }
+      }
+    
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 0;
+      }
+    </style>
+    </head>
+    <body>
+    <div class="snowfall" id="snowfall"></div>
+    
+    <script>
+    function createSnowflakes() {
+      const snowfall = document.getElementById('snowfall');
+      const numberOfSnowflakes = 100;
+    
+      for (let i = 0; i < numberOfSnowflakes; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        
+        const size = Math.random() * 5 + 2;
+        const startingLeft = Math.random() * 100;
+        const duration = Math.random() * 5 + 5;
+        const delay = Math.random() * 5;
+    
+        snowflake.style.width = `${size}px`;
+        snowflake.style.height = `${size}px`;
+        snowflake.style.left = `${startingLeft}%`;
+        snowflake.style.animationDuration = `${duration}s`;
+        snowflake.style.animationDelay = `${delay}s`;
+    
+        snowfall.appendChild(snowflake);
+      }
+    }
+    
+    createSnowflakes();
+    </script>
+    </body></html>
